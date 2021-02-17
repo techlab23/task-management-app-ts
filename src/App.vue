@@ -1,32 +1,26 @@
-<template>
-  <div id="app" class="container-fluid">
-    <AppHeader></AppHeader>
-    <transition name="page" mode="out-in" v-if="!isLoading">
-      <router-view></router-view>
-    </transition>
-    <AppLoadingIndicator v-if="isLoading"></AppLoadingIndicator>
-  </div>
+<template lang="pug">
+div(id="app" class="container-fluid")
+  AppHeader
+  transition(name="page" mode="out-in" v-if="!isLoading")
+    router-view
+  AppLoadingIndicator(v-if="isLoading")
 </template>
 
 <script lang="ts">
 import AppHeader from './components/AppHeader.vue';
 import AppLoadingIndicator from './components/AppLoadingIndicator.vue';
-import { mapGetters } from 'vuex';
-import { defineComponent } from 'vue';
+import { useStore } from 'vuex';
+import { computed, defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'App',
-  components: {
-    AppHeader,
-    AppLoadingIndicator,
-  },
-  beforeCreate() {
-    this.$store.dispatch('fetchData');
-  },
-  computed: {
-    ...mapGetters({
-      isLoading: 'isLoading',
-    }),
+  components: { AppHeader, AppLoadingIndicator },
+  setup() {
+    const store = useStore();
+    store.dispatch('fetchData');
+    const isLoading = computed<boolean>(() => store.getters.isLoading);
+    return {
+      isLoading,
+    };
   },
 });
 </script>

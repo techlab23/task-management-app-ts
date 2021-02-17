@@ -64,12 +64,12 @@ export default defineComponent({
       bus.emit('item-editing');
     }
 
-    function clearForm() {
-      form.value.id = '';
-      form.value.text = '';
-    }
+    // function clearForm() {
+    //   form.value.id = '';
+    //   form.value.text = '';
+    // }
 
-    function save(value) {
+    function save() {
       const updatedItem = {
         id: form.value.id,
         text: form.value.text,

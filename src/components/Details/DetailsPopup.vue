@@ -11,7 +11,7 @@ import { defineComponent } from 'vue';
 import useDetails from './details';
 
 export default defineComponent({
-  setup(props, context) {
+  setup(_, context) {
     const { open, close, detailsRef, popupToggled } = useDetails(context);
 
     return {

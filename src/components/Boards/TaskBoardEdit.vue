@@ -50,13 +50,6 @@ export default defineComponent({
     );
 
     // Methods
-    function handleTaskBoardEditing(board: Board) {
-      boardForm.value.id = board.id;
-      boardForm.value.name = board.name;
-      boardForm.value.description = board.description;
-      newBoardPopupRef.value?.open();
-    }
-
     function handlePopupToggled(isOpen: boolean) {
       if (!isOpen) {
         boardForm.value.id = '';
@@ -71,11 +64,21 @@ export default defineComponent({
       newBoardPopupRef.value?.close();
     }
 
+    function handleTaskBoardEditing(board?: Board) {
+      if (board) {
+        boardForm.value.id = board.id;
+        boardForm.value.name = board.name;
+        boardForm.value.description = board.description;
+        newBoardPopupRef.value?.open();
+      }
+    }
     // Lifecycle hooks
     onMounted(() => bus.on('taskboard-editing', handleTaskBoardEditing));
 
     return {
       schema,
+      heading,
+      activeBoard,
       boardForm,
       newBoardPopupRef,
       boardFormRef,

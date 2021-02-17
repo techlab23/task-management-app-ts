@@ -41,12 +41,6 @@ export default defineComponent({
       listForm.value.id ? 'Update list name' : 'Create new list'
     );
 
-    function handleTaskListEditing(list: List) {
-      listForm.value.id = list.id;
-      listForm.value.name = list.name;
-      newListPopupRef.value?.open();
-    }
-
     function handlePopupToggled(isOpen: boolean) {
       if (!isOpen) {
         listForm.value.id = '';
@@ -63,6 +57,14 @@ export default defineComponent({
       });
       newListPopupRef.value?.close();
       listFormRef.value?.resetForm();
+    }
+
+    function handleTaskListEditing(list?: List) {
+      if (list) {
+        listForm.value.id = list.id;
+        listForm.value.name = list.name;
+        newListPopupRef.value?.open();
+      }
     }
 
     onMounted(() => bus.on('tasklist-editing', handleTaskListEditing));

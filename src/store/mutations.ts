@@ -1,4 +1,3 @@
-import Vue from 'vue';
 import { MutationTree } from 'vuex';
 import { Board, List } from '../types';
 import { RootState } from './state';
@@ -26,10 +25,9 @@ const makeNewList = (payload: { name: string }): List => {
   }
 }
 
-
 export const mutations: MutationTree<RootState> = {
   // Set Initial Data
-  SET_INITIAL_DATA(state, payload: Board[] | null) {
+  SET_INITIAL_DATA(state, payload: Board[] | undefined) {
     state.boards = payload;
   },
 

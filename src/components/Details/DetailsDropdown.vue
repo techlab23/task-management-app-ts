@@ -9,10 +9,10 @@ details(class="detail-dropdown" ref="detailsRef" v-on:toggle="popupToggled()")
 </template>
 
 <script lang="ts">
-import { ref, defineComponent } from 'vue';
+import { defineComponent } from 'vue';
 import useDetails from './details';
 export default defineComponent({
-  setup(props, context) {
+  setup(_, context) {
     const { open, close, detailsRef, popupToggled } = useDetails(context);
 
     return {

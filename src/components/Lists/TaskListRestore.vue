@@ -18,15 +18,19 @@ DetailsPopup(ref="restoreListpopupRef" v-show="activeBoard")
 import DetailsPopup from '../Details/DetailsPopup.vue';
 import { useStore } from 'vuex';
 import { Board, List } from '../../types';
-import { computed, ref, defineComponent } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 
 export default defineComponent({
   components: { DetailsPopup },
   setup() {
     const store = useStore();
     const restoreListpopupRef = ref<typeof DetailsPopup>();
-    const activeBoard = computed<Board>(() => store.getters.activeBoard);
-    const archivedLists = computed<List[]>(() => store.getters.archivedLists);
+    const activeBoard = computed<Board>(
+      () => store.getters.activeBoard as Board
+    );
+    const archivedLists = computed<List[]>(
+      () => store.getters.archivedLists as List[]
+    );
     const boardName = computed<string>(() => activeBoard.value?.name || '');
 
     function handleTaskListRestore(list: List) {

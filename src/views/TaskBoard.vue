@@ -9,12 +9,13 @@ div(class="scrolling-wrapper")
 import TaskList from '../components/Lists/TaskList.vue';
 import Draggable from 'vuedraggable';
 import { useStore } from 'vuex';
-import { computed, onMounted } from 'vue';
+import { computed, defineComponent, onMounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { Board, List } from '../types';
-export default {
+
+export default defineComponent({
   components: { TaskList, Draggable },
-  setup(props, context) {
+  setup() {
     const store = useStore();
     const route = useRoute();
     const boards = computed<Board[]>(() => store.getters.allBoards);
@@ -70,5 +71,5 @@ export default {
       getBoard,
     };
   },
-};
+});
 </script>

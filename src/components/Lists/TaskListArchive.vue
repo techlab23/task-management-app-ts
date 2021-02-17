@@ -1,7 +1,7 @@
 <template lang="pug">
 DetailsPopup(ref="popupRef" style="position: absolute; top: 12px; right: 10px")
   template(v-slot:content v-if="board && list")
-    h5 Do you want to archive {{ list.name }} list?
+    h5 Do you want to archive {{ list?.name }} list?
     button(class="btn btn-sm btn-danger" @click="handleTaskListArchive(list)") Yes, please
 </template>
 
@@ -11,6 +11,11 @@ import { useStore } from 'vuex';
 import { Board, List } from '../../types';
 import { onMounted, ref, defineComponent } from 'vue';
 import { bus } from '../../utils';
+
+interface BoardListEventData {
+  board: Board;
+  list: List;
+}
 export default defineComponent({
   components: { DetailsPopup },
   setup() {
@@ -27,9 +32,9 @@ export default defineComponent({
       popupRef.value?.close();
     }
 
-    function handleTaskListArchiving(data) {
-      board.value = data.board;
-      list.value = data.list;
+    function handleTaskListArchiving(data?: BoardListEventData) {
+      board.value = data?.board;
+      list.value = data?.list;
       popupRef.value?.open();
     }
 

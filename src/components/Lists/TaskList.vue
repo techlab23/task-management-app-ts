@@ -31,7 +31,6 @@ export default defineComponent({
     },
   },
   setup(props) {
-    // const { board, list } = toRefs(props);
     const store = useStore();
     const isEditing = ref(false);
     const defaultItem = ref<Item>({ id: '', text: '' });
