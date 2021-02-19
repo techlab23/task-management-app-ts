@@ -1,8 +1,5 @@
 import axios from "axios"
-import { ActionContext } from "vuex"
 import { actions } from "../../src/store/actions"
-import { RootState } from "../../src/store/state"
-import { Board } from "../../src/types"
 
 jest.mock("axios")
 const mockedAxios = axios as jest.Mocked<typeof axios>;
