@@ -1,14 +1,17 @@
 import { getters }  from "../../src/store/getters"
+import { RootState } from "../../src/store/state"
 import { Board, List } from "../../src/types"
 
 describe("Vuex Getters", () => {
-  let state: any
+  let state: RootState
 
   beforeEach(() => {
     state = {
       isLoading: true,
       activeBoard: {
         id: "1234",
+        name: "Board name",
+        description: "Board description",
         archived: false,
         lists: [
           {
@@ -23,6 +26,8 @@ describe("Vuex Getters", () => {
       boards: [
         {
           id: "123",
+          name: "Board 123",
+          description: "Board description 123",
           archived: true,
           lists: [
             {
@@ -43,6 +48,8 @@ describe("Vuex Getters", () => {
         },
         {
           id: "1234",
+          name: "Board 1234",
+          description: "Board description 1234",
           archived: false,
           lists: [
             {
@@ -69,22 +76,22 @@ describe("Vuex Getters", () => {
   })
   it("unarchivedBoards", () => {
     const received = getters.unarchivedBoards(state, {}, state, {})
-    const expected = state.boards.filter((b:Board) => !b.archived)
+    const expected = state.boards?.filter((b:Board) => !b.archived)
     expect(received).toEqual(expected)
   })
   it("archivedBoards", () => {
     const received = getters.archivedBoards(state, {}, state, {})
-    const expected = state.boards.filter((b:Board) => b.archived)
+    const expected = state.boards?.filter((b:Board) => b.archived)
     expect(received).toEqual(expected)
   })
   it("archivedLists", () => {
     const received = getters.archivedLists(state, {}, state, {})
-    const expected = state.activeBoard.lists.filter((l:List) => l.archived)
+    const expected = state.activeBoard?.lists.filter((l:List) => l.archived)
     expect(received).toEqual(expected)
   })
   it("unarchivedLists", () => {
     const received = getters.unarchivedLists(state, {}, state, {})
-    const expected = state.activeBoard.lists.filter((l:List) => !l.archived)
+    const expected = state.activeBoard?.lists.filter((l:List) => !l.archived)
     expect(received).toEqual(expected)
   })
 })
