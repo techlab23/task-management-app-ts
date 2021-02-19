@@ -6,6 +6,9 @@ module.exports = {
         doctype: 'html',
       },
     },
+    'ts-jest': {
+      babelConfig: true,
+    },
   },
   testEnvironment: 'jsdom',
   transform: {
